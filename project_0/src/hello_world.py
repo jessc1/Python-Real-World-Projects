@@ -10,12 +10,17 @@ import sys
 def get_options(argv: list[str]) -> argparse.Namespace:
     """Parse command-line"""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--who", "-w", type=str, default="World")
+    parser.add_argument("--who", "-w", type=str, default="World",
+        help='who = name provided in the cli')
     return parser.parse_args(argv)
 
 def greeting(who: str = "World") -> None:
     """Write greeting."""
-    print(f"Hello, {who}!")
+    if who == '':
+        print(f"Is necessary to provide a value for {who}!")
+    else:
+        print(f"Hello, {who}!")
+    
 
 def main(argv: list[str] = sys.argv[1:]) -> None:
     """Get options and write greeting."""
