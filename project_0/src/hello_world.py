@@ -5,6 +5,17 @@
 
 import argparse
 import sys
+import logging
+
+def setup_global_logging():
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+        handlers=[
+            logging.StreamHandler(), 
+            logging.FileHandler("app.log", mode='a') 
+        ]
+    )
 
 
 def get_options(argv: list[str]) -> argparse.Namespace:
@@ -28,4 +39,8 @@ def main(argv: list[str] = sys.argv[1:]) -> None:
     greeting(options.who)
 
 if __name__ == "__main__":
+    setup_global_logging()
+    logger = logging.getLogger(__name__)
+    logger.info('Application started')
     main()
+    logger.info('Apllication finished')
