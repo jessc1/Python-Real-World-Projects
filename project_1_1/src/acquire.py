@@ -3,11 +3,22 @@
     Project 1.1: Data Acquisition Base Application
 """
 import argparse
-from dataclasses import asdict
 import json
-from pathlib import Path
+import logging
 import sys
+from dataclasses import asdict
+from pathlib import Path
+
 from csv_extract import *
+
+
+def setup_global_logging():
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+        handlers=[logging.StreamHandler(), logging.FileHandler("app.log", mode="a")],
+    )
+
 
 def get_options(argv: list[str]) -> argparse.Namespace:
     defaults = argparse.Namespace(
@@ -24,8 +35,8 @@ def get_options(argv: list[str]) -> argparse.Namespace:
 EXTRACT_CLASS: type[Extract] = Extract
 BUILDER_CLASSES: list[type[PairBuilder]] = [Series1Pair, Series2Pair, Series3Pair, Series4Pair]
 
-def main(argv: list[str]) -> None:
-    builders = [cls() for vls in BUILDER_CLASSES]
+def main(argv: list[str] = sys.argv[1:]) -> None:
+    builders = [builder_cls() for builder_cls in BUILDER_CLASSES]
     extractor = EXTRACT_CLASS(builders)
     # etc.
 
@@ -37,9 +48,11 @@ def main(argv: list[str]) -> None:
         options.output / "Series_3.ndjson",
         options.output / "Series_4.ndjson",
     ]
+    print('targets', targets)
     target_files = [
         target.open('w') for target in targets
     ]
+    print('target_files', target_files)
     for source in options.source:
         with source.open() as source:
             rdr = csv.reader(source)
@@ -50,4 +63,9 @@ def main(argv: list[str]) -> None:
         target.close()
 
 if __name__ == "__main__":
+    setup_global_logging()
+    logger = logging.getLogger(__name__)
+    logger.info("Acquire data started")
     main()
+    logger.info("Acquire data finished")
+

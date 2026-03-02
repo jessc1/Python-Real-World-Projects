@@ -1,0 +1,26 @@
+2026-03-02 17:24:37,209 [INFO] __main__: Acquire data started
+2026-03-02 17:24:37,296 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['x123', 'y1', 'y2', 'y3', 'x4', 'y4']
+2026-03-02 17:24:37,296 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='x123', y='y1')
+2026-03-02 17:24:37,297 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['10.0', '8.04', '9.14', '7.46', '8.0', '6.58']
+2026-03-02 17:24:37,305 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='10.0', y='8.04')
+2026-03-02 17:24:37,306 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['8.0', '6.95', '8.14', '6.77', '8.0', '5.76']
+2026-03-02 17:24:37,308 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='8.0', y='6.95')
+2026-03-02 17:24:37,310 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['13.0', '7.58', '8.74', '12.74', '8.0', '7.71']
+2026-03-02 17:24:37,311 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='13.0', y='7.58')
+2026-03-02 17:24:37,311 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['9.0', '8.81', '8.77', '7.11', '8.0', '8.84']
+2026-03-02 17:24:37,312 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='9.0', y='8.81')
+2026-03-02 17:24:37,313 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['11.0', '8.33', '9.26', '7.81', '8.0', '8.47']
+2026-03-02 17:24:37,313 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='11.0', y='8.33')
+2026-03-02 17:24:37,314 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['14.0', '9.96', '8.10', '8.84', '8.0', '7.04']
+2026-03-02 17:24:37,315 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='14.0', y='9.96')
+2026-03-02 17:24:37,315 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['6.0', '7.24', '6.13', '6.08', '8.0', '5.25']
+2026-03-02 17:24:37,316 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='6.0', y='7.24')
+2026-03-02 17:24:37,317 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['4.0', '4.26', '3.10', '5.39', '19.0', '12.50']
+2026-03-02 17:24:37,318 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='4.0', y='4.26')
+2026-03-02 17:24:37,321 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['12.0', '10.84', '9.13', '8.15', '8.0', '5.56']
+2026-03-02 17:24:37,324 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='12.0', y='10.84')
+2026-03-02 17:24:37,325 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['7.0', '4.82', '7.26', '6.42', '8.0', '7.91']
+2026-03-02 17:24:37,327 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='7.0', y='4.82')
+2026-03-02 17:24:37,328 [DEBUG] csv_extract: from_row() called with a list of type tring which return raw data:['5.0', '5.68', '4.74', '5.73', '8.0', '6.89']
+2026-03-02 17:24:37,328 [DEBUG] csv_extract: Series 1 Pair Successfully created : XYPair(x='5.0', y='5.68')
+2026-03-02 17:24:37,350 [INFO] __main__: Acquire data finished

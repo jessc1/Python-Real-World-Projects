@@ -2,11 +2,14 @@
     Python Real-World Projects
     Project 1.1: Data Acquisition Base Application
 """
-from model import RawData, XYPair
-from abc import ABC, abstractmethod
 import csv
+import logging
+from abc import ABC, abstractmethod
 from pathlib import Path
 
+from model import RawData, XYPair
+
+logger = logging.getLogger(__name__)
 
 class PairBuilder(ABC):
     target_class: type[RawData]
@@ -17,14 +20,23 @@ class PairBuilder(ABC):
 
 
 class Series1Pair(PairBuilder):
+    logger.info('class that get the instances and make it a series1 pair')
     target_class = XYPair
 
     def from_row(self, row: list[str]) -> RawData:
-        cls = self.target_class
-        # the rest of the implementation...
-        return cls(row[0], row[1])
+        logger.debug(
+            f"from_row() called with a list of type tring which return raw data:{row}")
+        try:            
+            cls = self.target_class
+            # the rest of the implementation...
+            logger.debug(f"Series 1 Pair Successfully created : {cls(row[0], row[1])}")
+            return cls(row[0], row[1])
+
+        except Exception as e:
+            logger.debug(f"Error in from_row():{e}")
 
 class Series2Pair(PairBuilder):
+    logger.info('class that get the instances and make it a series2 pair')
     target_class = XYPair
 
     def from_row(self, row: list[str]) -> RawData:
@@ -56,7 +68,7 @@ EXTRACT_CLASS: type[Extract] = Extract
 BUILDER_CLASSES: list[type[PairBuilder]] = [Series1Pair,]
 
 def test_series1pair() -> None:
-    from unittest.mock import Mock, sentinel, call
+    from unittest.mock import Mock, call, sentinel
     mock_raw_class = Mock()
     p1 = Series1Pair()
     p1.target_class = mock_raw_class
