@@ -4,20 +4,11 @@
 """
 import argparse
 import json
-import logging
 import sys
 from dataclasses import asdict
 from pathlib import Path
 
 from csv_extract import *
-
-
-def setup_global_logging():
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-        handlers=[logging.StreamHandler(), logging.FileHandler("app.log", mode="a")],
-    )
 
 
 def get_options(argv: list[str]) -> argparse.Namespace:
@@ -48,11 +39,9 @@ def main(argv: list[str] = sys.argv[1:]) -> None:
         options.output / "Series_3.ndjson",
         options.output / "Series_4.ndjson",
     ]
-    print('targets', targets)
     target_files = [
         target.open('w') for target in targets
     ]
-    print('target_files', target_files)
     for source in options.source:
         with source.open() as source:
             rdr = csv.reader(source)
@@ -63,7 +52,7 @@ def main(argv: list[str] = sys.argv[1:]) -> None:
         target.close()
 
 if __name__ == "__main__":
-    setup_global_logging()
+    setup_logging()
     logger = logging.getLogger(__name__)
     logger.info("Acquire data started")
     main()

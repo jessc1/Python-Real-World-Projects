@@ -3,13 +3,17 @@
     Project 1.1: Data Acquisition Base Application
 """
 import csv
-import logging
+import os
+import sys
 from abc import ABC, abstractmethod
 from pathlib import Path
 
 from model import RawData, XYPair
 
-logger = logging.getLogger(__name__)
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(root_dir)
+from log_config import *
+
 
 class PairBuilder(ABC):
     target_class: type[RawData]
@@ -18,18 +22,17 @@ class PairBuilder(ABC):
     def from_row(self, row: list[str]) -> RawData:
         ...
 
-
 class Series1Pair(PairBuilder):
-    logger.info('class that get the instances and make it a series1 pair')
+    logger.info('class that get the Pair Builder instances and make it a series1 pair')
     target_class = XYPair
 
     def from_row(self, row: list[str]) -> RawData:
         logger.debug(
-            f"from_row() called with a list of type tring which return raw data:{row}")
+            f"from_row() called with a list of type string which return raw data:{row}")
         try:            
             cls = self.target_class
             # the rest of the implementation...
-            logger.debug(f"Series 1 Pair Successfully created : {cls(row[0], row[1])}")
+            logger.debug(f"Series 1 Pair Successfully created  from: {cls(row[0], row[1])}")
             return cls(row[0], row[1])
 
         except Exception as e:
@@ -40,8 +43,12 @@ class Series2Pair(PairBuilder):
     target_class = XYPair
 
     def from_row(self, row: list[str]) -> RawData:
-        cls = self.target_class
-        return cls(row[0], row[2])
+        try:
+            cls = self.target_class
+            logger.debug(f"Series 2  Pair Successfully created from: {cls(row[0], row[2])}")
+            return cls(row[0], row[2])
+        except Exception as e:
+            logger.debug(f"Error in from_row():{e}")
 
 class Series3Pair(PairBuilder):
     target_class = XYPair
@@ -58,10 +65,13 @@ class Series4Pair(PairBuilder):
         return cls(row[4], row[5])
 
 class Extract:
+    logger.info('Class that build XYPair instances')
+
     def __init__(self, builders: list[PairBuilder]) -> None:
         self.builders = builders
 
     def build_pairs(self, row: list[str]) -> list[RawData]:
+        logger.debug(f"make a item  from {row} parsed from the csv file")
         return [bldr.from_row(row) for bldr in self.builders]
 
 EXTRACT_CLASS: type[Extract] = Extract
